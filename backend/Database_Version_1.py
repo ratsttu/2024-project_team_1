@@ -59,4 +59,12 @@ def printTable(table):
         print(table[i][0])
         table[i][1].show()
         table[i][2].show()
-printTable(getTable())
+def date2Index(date):
+    connection = mysql.connector.connect(host='localhost',user='root',password='Mast3rP13c3!',database='rats_project1')
+    cursor = connection.cursor()
+    cursor.execute("SELECT indexed FROM photos where dateCaptured=%s",(date))
+    index=cursor.fetchone()
+    connection.commit()
+    connection.close()
+    index=index[0]
+    return index
